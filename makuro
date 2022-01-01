@@ -8,10 +8,10 @@ const listMenu = [
     "- jalankan local server",
     "- lihat directory",
     "- git push",
-    "- git lihat remote url",
+    "- git push pertama kali",
     "- git set remote url",
     "- git add remote origin",
-    "- git push pertama kali",
+    "- git lihat remote url",
     "- lihat database"
 ];
 menu();
@@ -64,7 +64,7 @@ function pilihan(index){
             gitPush()
         break;
         case 3:
-            lihatGitRemoteUrl()
+            gitPushPertamaKali()
         break;
         case 4:
             setRemoteUrl();
@@ -73,7 +73,8 @@ function pilihan(index){
             addRemoteOrigin()
         break;
         case 6:
-            gitPushPertamaKali()
+            lihatGitRemoteUrl()
+            
         break;
         default: {
             terminal.clear();
