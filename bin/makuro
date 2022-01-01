@@ -197,7 +197,8 @@ function stopPort(){
 }
 
 function updateMakuro(){
-    shell.exec("npm un -g makuro");
-    shell.exec("npm i -g malikkurosaki/makuro");
-    process.exit();
+    terminal.yellow("update makuro ...")
+    let upd = shell.exec("npm un -g makuro & npm i -g malikkurosaki/makuro");
+    terminal.green(upd.stdout);
+    terminal.yellow(upd.stderr);
 }
