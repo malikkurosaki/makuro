@@ -12,7 +12,7 @@ const listMenu = [
     "- git set remote url",
     "- git add remote origin",
     "- git lihat remote url",
-    "- lihat database"
+    "- git paksa push"
 ];
 menu();
 
@@ -76,6 +76,9 @@ function pilihan(index){
             lihatGitRemoteUrl()
             
         break;
+        case 7:
+            gitPaksaPush()
+        break;
         default: {
             terminal.clear();
             terminal.yellow("menu dipilih ");
@@ -93,6 +96,7 @@ async function openBrowser(){
 }
 
 function gitPush(){
+    terminal('\n').eraseLineAfter.yellow('...')
     shell.exec(`git add . & git commit -m "${new Date()}" & git push origin main`)
 }
 
@@ -150,4 +154,9 @@ function gitPushPertamaKali(){
     terminal('\n').eraseLineAfter.yellow('...');
     let pertama = shell.exec(`git add . && git commit -m "pertama" && git push -u origin main`);
 
+}
+
+function gitPaksaPush(){
+    terminal('\n').eraseLineAfter.yellow('...')
+    shell.exec(`git add . && git commit -m "${new Date()}" && git push -f origin main`)
 }
