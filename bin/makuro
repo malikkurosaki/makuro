@@ -3,16 +3,20 @@
 const terminal = require('terminal-kit').terminal;
 const open = require('open');
 const shell = require('shelljs');
+const {exec, spawn} = require('child_process');
 
 const listMenu = [
-    "- jalankan local server",
+    "- buka browser http://localhost:3000",
     "- lihat directory",
     "- git push",
     "- git push pertama kali",
     "- git set remote url",
     "- git add remote origin",
     "- git lihat remote url",
-    "- git paksa push"
+    "- git paksa push",
+    "- jalankan local server",
+    "- stop port 3000",
+    "- update makuro"
 ];
 menu();
 
@@ -25,7 +29,9 @@ function keluar(){
         terminal.eraseDisplay();
         terminal('\n').eraseLineAfter.cyan("bye...");
         terminal('\n');
-        process.exit();
+        process.kill(process.pid, 'SIGTERM')
+        process.exit()
+        // process.exit();
     }, 100);
     
 }
@@ -79,6 +85,15 @@ function pilihan(index){
         case 7:
             gitPaksaPush()
         break;
+        case 8:
+            jalankanLocalServer()
+        break;
+        case 9:
+            stopPort()
+        break;
+        case 10:
+            updateMakuro()
+        break;
         default: {
             terminal.clear();
             terminal.yellow("menu dipilih ");
@@ -91,7 +106,8 @@ function pilihan(index){
 }
 
 async function openBrowser(){
-    terminal.green("menjalankan local server http://localhost:3000")
+    terminal.green("membuka browser http://localhost:3000")
+    terminal('\n');
     await open("http://localhost:3000");
 }
 
@@ -159,4 +175,29 @@ function gitPushPertamaKali(){
 function gitPaksaPush(){
     terminal('\n').eraseLineAfter.yellow('...')
     shell.exec(`git add . && git commit -m "${new Date()}" && git push -f origin main`)
+}
+
+function jalankanLocalServer(){
+    terminal('\n').eraseLineAfter.yellow('menjalankan local server ... \n');
+    let jalan = shell.exec("nodemon . & webpack --mode development --watch");
+    terminal.blue(jalan.stdout);
+    
+}
+
+function stopPort(){
+    terminal.singleColumnMenu(["linux", "windows"], (err, res) => {
+        if(res.selectedIndex == 0){
+            shell.exec("killall node")
+        }else{
+            shell.exec("Taskkill /IM node.exe /F")
+        } 
+
+        process.exit();
+    })
+}
+
+function updateMakuro(){
+    shell.exec("npm un -g makuro");
+    shell.exec("npm i -g malikkurosaki/makuro");
+    process.exit();
 }
