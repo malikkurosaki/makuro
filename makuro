@@ -1,0 +1,152 @@
+#!/usr/bin/env node
+
+const terminal = require('terminal-kit').terminal;
+const open = require('open');
+const shell = require('shelljs');
+
+const listMenu = [
+    "- jalankan local server",
+    "- lihat directory",
+    "- git push",
+    "- git lihat remote url",
+    "- git set remote url",
+    "- git add remote origin",
+    "- git push pertama kali",
+    "- lihat database"
+];
+menu();
+
+function keluar(){
+    terminal.grabInput(false);
+    terminal('\n').eraseLineAfter
+    setTimeout(() => {
+        terminal.clear
+        // terminal('\n\n\n\n\n\n\n').eraseLineAfter;
+        terminal.eraseDisplay();
+        terminal('\n').eraseLineAfter.cyan("bye...");
+        terminal('\n');
+        process.exit();
+    }, 100);
+    
+}
+
+terminal.on('key', (name, match, data) => {
+    if(name == "CTRL_C" ){
+        keluar()
+    };
+
+    if(data.code == 77) {
+        menu()
+    };
+})
+
+
+function menu(){
+    terminal("\n");
+    terminal.underline.green("Pilih Menunya :\n")
+    terminal.italic("* CTRL + C untuk keluar , SHIFT + M untuk memunculkan menu kembali\n")
+    terminal.singleColumnMenu(listMenu, (err, res) => {
+        terminal("\n").eraseLineAfter;
+        pilihan(res.selectedIndex);
+    })
+    
+}
+
+function pilihan(index){
+    switch (index){
+        case 0: 
+            openBrowser()
+        break;
+        case 1: 
+            lihatDirectory()
+        break;
+        case 2:
+            gitPush()
+        break;
+        case 3:
+            lihatGitRemoteUrl()
+        break;
+        case 4:
+            setRemoteUrl();
+        break;
+        case 5:
+            addRemoteOrigin()
+        break;
+        case 6:
+            gitPushPertamaKali()
+        break;
+        default: {
+            terminal.clear();
+            terminal.yellow("menu dipilih ");
+            terminal.bold(listMenu[index]);
+            terminal.yellow(" masih dalam pengerjaan")
+            terminal('\n').eraseLineAfter
+            menu()
+        }
+    }
+}
+
+async function openBrowser(){
+    terminal.green("menjalankan local server http://localhost:3000")
+    await open("http://localhost:3000");
+}
+
+function gitPush(){
+    shell.exec(`git add . & git commit -m "${new Date()}" & git push origin main`)
+}
+
+function lihatDirectory(){
+    terminal.cyan('lokasi project adalah :');
+    terminal('\n');
+    shell.exec(`pwd`);
+}
+
+function lihatGitRemoteUrl(){
+    terminal.cyan("remote server git adalah: ");
+    terminal('\n');
+    let remote = shell.exec(`git remote -v`);
+    if(remote.stdout == ""){
+        terminal.red("kosong , silahkan set remotenya");
+    }else{
+        terminal(remote.stdout);
+    }
+
+}
+
+function setRemoteUrl(){
+    terminal.cyan("git remote url : ")
+    terminal.inputField(
+        (err, res) => {
+            if(res == ""){
+                terminal.eraseLineAfter.yellow("isi remote urlnya");
+                return;
+            }
+            terminal('\n').eraseLineAfter.yellow('...')
+            let setUrl = shell.exec(`git remote set-url origin ${res}`);
+            terminal(setUrl.stdout);
+            if(setUrl.stdout == ""){
+                terminal('\n').eraseLineAfter.green('success');
+            }
+        }
+    )
+}
+
+function addRemoteOrigin(){
+    terminal('\n').eraseLineAfter.cyan('url remote: ');
+    terminal.inputField((err, res) => {
+        if(res == "") {
+            terminal('\n').yellow("... jangan kosong ")
+            return
+        }
+
+        terminal('\n').eraseLineAfter.yellow('...');
+        let addRemote = shell.exec(`git remote add origin ${res}`);
+        if(addRemote.stdout == "") terminal('\n').eraseLineAfter.green("success");
+    })
+}
+
+function gitPushPertamaKali(){
+    terminal('\n').eraseLineAfter.yellow('...');
+    let pertama = shell.exec(`git add . && git commit -m "pertama" && git push -u origin main`);
+
+}
