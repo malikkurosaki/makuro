@@ -1,20 +1,29 @@
 {
   "name": "makuro",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "makuro cli",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "makuro": "./bin/makuro"
+    "makuro": "bin/makuro"
   },
   "keywords": [],
-  "author": "",
+  "author": "malikkurosaki",
   "license": "ISC",
   "dependencies": {
     "open": "^8.4.0",
     "shelljs": "^0.8.4",
     "terminal-kit": "^2.3.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malikkurosaki/makuro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/malikkurosaki/makuro/issues"
+  },
+  "homepage": "https://github.com/malikkurosaki/makuro#readme"
 }

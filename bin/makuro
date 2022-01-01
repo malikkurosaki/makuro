@@ -113,7 +113,7 @@ async function openBrowser(){
 
 function gitPush(){
     terminal('\n').eraseLineAfter.yellow('...')
-    shell.exec(`git add . & git commit -m "${new Date()}" & git push origin main`)
+    shell.exec(`git add . && git commit -m "${new Date()}" && git push origin main`)
 }
 
 function lihatDirectory(){
