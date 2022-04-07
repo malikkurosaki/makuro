@@ -2,22 +2,15 @@
   "name": "makuro",
   "version": "1.0.2",
   "description": "makuro cli",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "makuro": "bin/makuro"
+    "makuro": "./bin/makuro.sh"
   },
   "keywords": [],
   "author": "malikkurosaki",
   "license": "ISC",
-  "dependencies": {
-    "open": "^8.4.0",
-    "shelljs": "^0.8.4",
-    "terminal-kit": "^2.3.0"
-  },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/malikkurosaki/makuro.git"
@@ -25,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/malikkurosaki/makuro/issues"
   },
-  "homepage": "https://github.com/malikkurosaki/makuro#readme"
+  "homepage": "https://github.com/malikkurosaki/makuro#readme",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "minimist": "^1.2.6",
+    "node-notifier": "^10.0.1"
+  }
 }
