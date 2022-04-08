@@ -56,7 +56,7 @@ _send() {
     echo "$message $from $chat"
 }
 
-_chat() {
+_chatx() {
 
     local db=$(_admin)
     local chat='

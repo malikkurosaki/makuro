@@ -12,24 +12,26 @@ _menu() {
 
     _yellow '
         Pilihan:
-        help,       Menampilkan bantuan
-        chat,       Membuat chat obrolan
-        git,        menampilkan property untuk git
+        h,       Menampilkan bantuan
+        c,       Membuat chat obrolan
+        g,       menampilkan property untuk git
+        r,       senjalakan debug [server | client]
+        q,       quite | keluar
 
     ' | sed -e "s/^[ \t]*//"
 
     read -p "Pilihan: " pilihan
     case $pilihan in
-    git)
+    g)
         _git $@
         ;;
-    chat)
+    c)
         _chat $@
         ;;
-    run)
+    r)
         _run $@
         ;;
-    help)
+    h)
         _help
         ;;
     q)

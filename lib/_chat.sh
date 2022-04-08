@@ -1,3 +1,9 @@
+_chat() {
+    dir="$(npm root -g)"
+    data='
+const dir = "'$dir'"
+const color = require(dir+"/colors")
+
 var serviceAccount = {
     "type": "service_account",
     "project_id": "malikkurosaki1985",
@@ -17,16 +23,9 @@ admin.initializeApp({
     databaseURL: "https://malikkurosaki1985.firebaseio.com"
 });
 
-const db = admin.database()
-const event = require('events');
-const ev = new event.EventEmitter();
-const colors = require('colors');
+const db = admin.database();
 
-ev.on('send', (data) => {
-    console.log(data);
-})
-
-const readline = require('readline').createInterface({
+const readline = require("readline").createInterface({
     input: process.stdin,
     output: process.stdout
 });
@@ -71,7 +70,7 @@ function send(rm) {
     let us = await user();
 
     let ref = db.ref("/rooms/"+rm);
-    ref.on('child_added', (snapshot) => {
+    ref.on("child_added", (snapshot) => {
         let data = snapshot.val();
         let pesan = ""
         pesan += "from: "+data.user+"\n";
@@ -85,22 +84,6 @@ function send(rm) {
 
 })();
 
-// db.ref("/malik").on("child_added", (snapshot) => {
-//     let data = "";
-//     data += "from:       " + snapshot.val().from + "\n";
-//     data += "message:    " + snapshot.val().message + "\n";
-//     data += snapshot.val().time + "\n";
-//     data += "-----------------------------------------------------\n";`
-//     console.log(data.green);
-// })
-
-// db.ref("/88CEEDA9-121B-47BB-AB84-BB6C65CA537B").push({
-//     from: "admin",
-//     message: "hello",
-//     time: "2020-01-01"
-// }).then(function () {
-//     console.log("success")
-//     process.exit()
-// })
-
-
+'
+    node -e "$data"
+}
