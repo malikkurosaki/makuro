@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/malikkurosaki/makuro#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "firebase-admin": "^10.0.2",
-    "minimist": "^1.2.6",
-    "node-notifier": "^10.0.1"
+    "minimist": "^1.2.6"
   }
 }

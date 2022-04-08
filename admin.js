@@ -17,26 +17,32 @@ admin.initializeApp({
     databaseURL: "https://malikkurosaki1985.firebaseio.com"
 });
 
+console.log("muali");
 const db = admin.database()
-// db.ref("/88CEEDA9-121B-47BB-AB84-BB6C65CA537B").on("value", function (snapshot) {
-//     snapshot.forEach(function (childSnapshot) {
-//         let data = childSnapshot.toJSON()
-//         let pesan = "";
-//         pesan += "from:         " + data.from + "\n"
-//         pesan += "message:      " + data.message + "\n"
-//         pesan += "-:            " + data.time + "\n"
-//         pesan += "-----------------------------------------"
-//         console.log(pesan)
-//     })
-// })
+const event = require('events');
+const ev = new event.EventEmitter();
+const colors = require('colors');
 
-db.ref("/88CEEDA9-121B-47BB-AB84-BB6C65CA537B").push({
-    from: "admin",
-    message: "hello",
-    time: "2020-01-01"
-}).then(function () {
-    console.log("success")
-    process.exit()
+ev.on('send', (data) => {
+    console.log(data);
 })
+
+db.ref("/malik").on("child_added", (snapshot) => {
+    let data = "";
+    data +="from:       " + snapshot.val().from + "\n";
+    data +="message:    " + snapshot.val().message + "\n";
+    data +=snapshot.val().time + "\n";
+    data +="-----------------------------------------------------\n";
+   console.log(data.green);
+})
+
+// db.ref("/88CEEDA9-121B-47BB-AB84-BB6C65CA537B").push({
+//     from: "admin",
+//     message: "hello",
+//     time: "2020-01-01"
+// }).then(function () {
+//     console.log("success")
+//     process.exit()
+// })
 
 

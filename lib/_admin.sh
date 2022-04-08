@@ -1,11 +1,16 @@
 _admin() {
     declare room
+    declare from
     [[ -n $room ]] || {
-        echo "console.log('halo , silahkan masukkan nama room')"
         read -p "Room: " room
-        echo "console.log('mendapatkan pesan  ...')"
     }
+
+    [[ -n $from ]] || {
+        read -p "From: " from
+    }
+
     local room="var room = '$room';"
+    local from="var from = '$from';"
     local dir="var dir = \"$(npm root -g)/\";"
     local admin='
         var serviceAccount = {
@@ -31,13 +36,12 @@ _admin() {
         const db = admin.database()
         
     '
-    echo "$room $dir $admin"
+    echo "$from $room $dir $admin"
 }
 
 _send() {
 
     local message="var message = '$1';"
-    local from="var from = '$USER';"
     local chat='
     db.ref("/"+room).push({
         from: from,
@@ -56,6 +60,8 @@ _chat() {
 
     local db=$(_admin)
     local chat='
+    var content = "";
+    var dari = "";
     db.ref("/"+room).on("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
             let data = childSnapshot.toJSON()
@@ -64,18 +70,27 @@ _chat() {
             pesan += "message:  " + data.message + "\n"
             pesan += data.time + "\n"
             pesan += "-----------------------------------------"
-            console.log(pesan.green)
+            content = pesan
+            dari = data.from
         })
+
+        if(from == dari){
+            console.log(content.green);
+        }else{
+            console.log(content.yellow);
+        }
         console.log("\nKetik Pesan: ")
     });
     '
+
+    # tput reset
+    clear
     node -e "$db $ref $chat" &
     while true; do
         read -p "" message
+        echo "..."
         send=$(_send "$message")
-        tput reset
         node -e "$db $ref $send"
-        
     done
 
 }

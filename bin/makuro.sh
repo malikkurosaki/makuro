@@ -2,18 +2,22 @@
 g_dir=$(npm root -g)
 
 [[ -d $g_dir/express ]] || {
+    echo "mencoba mendapatkan data yang dibutuhkan ..."
     npm i -g express
 }
 
 [[ -d $g_dir/minimist ]] || {
+    echo "mencoba mendapatkan data yang dibutuhkan ..."
     npm i -g minimist
 }
 
 [[ -d $g_dir/firebase-admin ]] || {
+    echo "mencoba mendapatkan data yang dibutuhkan ..."
     npm i -g firebase-admin
 }
 
 [[ -d $g_dir/colors ]] || {
+    echo "mencoba mendapatkan data yang dibutuhkan ..."
     npm i -g colors
 }
 
