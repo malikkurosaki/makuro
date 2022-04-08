@@ -6,12 +6,12 @@ _git() {
 
     _yellow "
     Property untuk git:
-    push,       push ke repository
+    p, push     push ke repository
     "
 
     read -p "Pilihan: " pilihan
     case $pilihan in
-    push)
+    p)
         git branch
         read -p "Masukkan nama branch: " branch
         [[ -z $branch ]] && exit 1

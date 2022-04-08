@@ -12,11 +12,11 @@ _menu() {
 
     _yellow '
         Pilihan:
-        h,       Menampilkan bantuan
-        c,       Membuat chat obrolan
-        g,       menampilkan property untuk git
-        r,       senjalakan debug [server | client]
-        q,       quite | keluar
+        h, help      Menampilkan bantuan
+        c, chat      Membuat chat obrolan
+        g, git       menampilkan property untuk git
+        r, run       senjalakan debug [server | client]
+        q, quit      quite | keluar
 
     ' | sed -e "s/^[ \t]*//"
 
