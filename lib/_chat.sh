@@ -1,8 +1,17 @@
 _chat() {
     dir="$(npm root -g)"
     data='
+
 const dir = "'$dir'"
 const color = require(dir+"/colors")
+
+var info = "Chat Chit Chut\n";
+info +="----------------\n";
+info += "SELAMAT DATANG\n";
+info += "----------------\n";
+info += "masukkan nama room,\nmasukkan nama user,\n q | CTRL+q untuk keluar\n\n";
+info += "malikkurosaki@2022 v001\n";
+console.log(info.cyan)
 
 var serviceAccount = {
     "type": "service_account",
