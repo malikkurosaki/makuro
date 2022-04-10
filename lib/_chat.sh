@@ -15,7 +15,7 @@ console.log(info.cyan)
 
 '$service_account'
 
-var admin = require("firebase-admin");
+var admin = require(dir+"/firebase-admin");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://malikkurosaki1985.firebaseio.com"
@@ -23,7 +23,7 @@ admin.initializeApp({
 
 const db = admin.database();
 
-const readline = require("readline").createInterface({
+const readline = require(dir+"/readline").createInterface({
     input: process.stdin,
     output: process.stdout
 });
