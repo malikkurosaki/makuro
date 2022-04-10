@@ -23,7 +23,7 @@ admin.initializeApp({
 
 const db = admin.database();
 
-const readline = require(dir+"/readline").createInterface({
+const readline = require("readline").createInterface({
     input: process.stdin,
     output: process.stdout
 });
