@@ -6,7 +6,8 @@ _git() {
 
     _yellow "
     Property untuk git:
-    p, push     push ke repository
+    p, push         push ke repository
+    c, checkout     git checkout
     "
 
     read -p "Pilihan: " pilihan
@@ -21,7 +22,7 @@ _git() {
         git push origin $branch
         ;;
     c)
-        git fecth --all && git branch
+        git fetch --all && git branch
         read -p "Masukkan nama branch: " branch
         [[ -z $branch ]] && {
             echo "branch tidak boleh kosong"
